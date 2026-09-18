@@ -4,9 +4,9 @@
 
 ## Web deployment — 2026-09-18
 
-- Added a single-threaded Godot Web export preset for GitHub Pages and an Actions workflow that downloads checksum-verified Godot 4.7.2 tools, caches them, runs the rule and scene suites, exports the browser build, and deploys it with GitHub's official Pages actions. The application title is now simply `Candy Shop`.
-- Automated checks: editor import completed successfully; rule validation passed 58,396 checks with zero failures; scene validation passed 662 checks with zero failures. The local Web export correctly recognized the preset but could not finish because this workstation only has Windows/Linux templates; the cloud workflow installs the official Web templates.
-- Visual inspection: the Web build has not yet been produced or inspected in a browser.
+- Added a single-threaded Godot Web export preset for GitHub Pages and an Actions workflow that downloads checksum-verified Godot 4.7.2 tools, caches them, runs the rule and scene suites, exports the browser build, and deploys it with GitHub's official Pages actions. The application title is now simply `Candy Shop`. The live build is `https://natertots.github.io/CandyShop/`.
+- Automated checks: local editor import completed successfully; local rule validation passed 58,396 checks with zero failures; local scene validation passed 662 checks with zero failures. The first GitHub Actions build repeated import and both suites, exported the Web build, uploaded the Pages artifact, and deployed successfully. The page, JavaScript loader, 39.5 MB WebAssembly module, resource pack, license, and Godot notices all return HTTP 200 with appropriate content types.
+- Visual inspection: the deployed Web build has not yet been visually inspected in an interactive browser.
 - Hardware testing: browser keyboard/mouse, browser controller, audio, fullscreen, persistence, Safari, mobile, and Steam Deck behavior remain unverified.
 
 ## Repository publication — 2026-09-18

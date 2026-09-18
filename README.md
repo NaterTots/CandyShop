@@ -4,6 +4,8 @@ Restore one colorful candy shop: **320 pieces, four families, 16 variants, 20 co
 
 ## Launch
 
+**Web:** play at [natertots.github.io/CandyShop](https://natertots.github.io/CandyShop/). The browser build requires WebGL 2; current Chrome, Edge, or Firefox is recommended. Click the game before using keyboard, mouse, audio, or controller input. Progress is stored in that browser's site data and does not persist in private/incognito browsing.
+
 **Standalone Windows:** open `builds/windows/CandyShop.exe`, or extract `builds/CandyShop-Windows-x86_64.zip` and open its executable. No Godot installation is required. Existing full-shop saves are compatible.
 
 **Linux / Steam Deck:** extract `builds/CandyShop-Linux-x86_64.tar.gz`, keep the executable and PCK together, then run `chmod +x CandyShop.x86_64` and `./CandyShop.x86_64`. See the included `PLAYING.txt` for Steam's non-Steam game setup and save transfer. Steam Deck hardware remains unverified.
