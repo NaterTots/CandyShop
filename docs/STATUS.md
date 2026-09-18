@@ -5,6 +5,7 @@
 ## Repository publication — 2026-09-18
 
 - Published the complete source repository to the default `main` branch of `NaterTots/CandyShop` as the `POC commit` commit, preserving the repository's existing license and removing the temporary remote `master` branch. Godot editor state, generated exports, platform build intermediates, local environment overrides, export credentials, signing material, temporary files, and operating-system metadata are excluded by `.gitignore`.
+- Reworked the root README as a present-tense project guide. It no longer uses milestone or acceptance-history framing; current gameplay, launch, validation, packaging, and playtest information remains documented.
 - Automated checks: reviewed Git status and ignored-file coverage; scanned tracked candidates for credential filenames and common embedded GitHub/API token or password assignments. No credential candidates were found. This publication-only task did not rerun the game validation suites documented below.
 - Visual inspection: not performed for this publication-only task; the prior Milestone 3 visual results remain unchanged.
 - Hardware testing: not performed; controller and Steam Deck checks remain outstanding.

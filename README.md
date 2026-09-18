@@ -1,8 +1,6 @@
-# Candy Shop — Milestone 3
+# Candy Shop
 
 Restore one colorful candy shop: **320 pieces, four families, 16 variants, 20 copies each, and 16 displays with 20 slots each**. Choose each eligible display's flavor. Mixtures are allowed and reversible. No stages, customers, scores, timers, or penalties.
-
-Milestones 1 and 2 are owner-accepted. Milestone 3 polish and standalone builds are ready for playtesting.
 
 ## Launch
 
@@ -18,7 +16,7 @@ Close an older running copy, double-click **`Launch Candy Shop.cmd`**, then choo
 & 'C:\Users\hodge\Downloads\Godot_v4.7.2-stable_win64.exe\Godot_v4.7.2-stable_win64.exe' --path 'C:\Users\hodge\Development\CandyShop'
 ```
 
-The original application data directory is retained for continuity. Full-shop progress uses **`shop_save.json`**, separate from the accepted **`slice_save.json`**. The slice is preserved, not converted into a partly completed full shop. Settings use **`settings.cfg`**. Open the directory through **Project → Open User Data Folder** in Godot.
+Progress is stored in **`shop_save.json`** and settings in **`settings.cfg`**. Open their directory through **Project → Open User Data Folder** in Godot.
 
 ## Controls
 
@@ -37,13 +35,13 @@ The original application data directory is retained for continuity. Full-shop pr
 
 The crosshair becomes a gold diamond when a piece or display is within reach. This confirms the target without assigning a flavor destination.
 
-The accepted 3.5 m/s walking speed, 2 m starting reach, press-edge actions, trigger hysteresis, newest-item selection, and reversible transfers are preserved. Primary action on stored candy still deposits into its owning display. Retrieval takes the aimed piece; aiming at the container takes the latest remaining deposit. New deposits fill the earliest free slot. Walk around kiosks to inspect inner rows.
+Walking speed is 3.5 m/s and starting reach is 2 m. Actions trigger once per press, controller triggers use hysteresis, the newest item is selected automatically, and every transfer is reversible. Primary action on stored candy deposits into its owning display. Retrieval takes the aimed piece; aiming at the container takes the latest remaining deposit. New deposits fill the earliest free slot. Walk around kiosks to inspect inner rows.
 
 ## Shop and progression
 
 Lollipops and double-twist wrapped sweets each have a central kiosk with four open displays. Chocolate bars and boxed sweets occupy four open shelf bays on each side. The long rear counter has a right-side gap and employee aisle. Everything is accessible immediately. The room is tuned to 18 × 22 m for clear passages and larger displays.
 
-Fresh runs scatter candy into irregular shallow floor heaps and individual strays, with varied orientations and no initial shelf/counter pieces. Existing full-shop saves receive this arrangement for loose candy once; held/stored candy and progress are preserved. Chocolate bars are thin cocoa-ended slabs; boxed sweets use chunky hexagonal cartons, with flavor markings on top and bottom.
+Fresh runs scatter candy into irregular shallow floor heaps and individual strays, with varied orientations and no initial shelf/counter pieces. Chocolate bars are thin cocoa-ended slabs; boxed sweets use chunky hexagonal cartons, with flavor markings on top and bottom.
 
 Every flavor combines saturated color, wrapper pattern, and icon: heart/stripes, sun/dots, diamond/checks, or star/chevrons within its family. Names/patterns appear when aimed at or selected. Inventory abbreviations and icons distinguish carried pieces; brackets mark selection. See `docs/candy-variants.png` for the full catalog.
 
@@ -64,7 +62,7 @@ F/Y finds the selected flavor, or the aimed flavor when hands are empty. Matches
 
 At **32 or fewer pieces outside displays**, Find remaining works independently of upgrades. It points to loose candy, then reminds you to place held pieces. With everything stored in mixtures, it points to an incomplete display. The pause menu toggles remaining/matching mode. Remaining mode defaults on and uses matching mode until the endgame threshold is reached.
 
-Finishing all displays plays confetti/chimes and offers **Keep admiring** or **Restart**. Displays remain editable. The final celebration plays once per run. Confirmed restart reshuffles positions and resets upgrades while retaining settings.
+Finishing all displays plays confetti/chimes and offers **Keep admiring** or **Restart**. Displays remain editable. The final celebration plays once per run. Restart reshuffles positions and resets upgrades while retaining settings.
 
 ## Settings and saves
 
@@ -96,7 +94,7 @@ Matching **4.7.2.stable** Windows/Linux templates are installed and their downlo
 
 Windows uses an embedded resource pack. Linux ships a separate PCK. Add the native executable to Steam with the extracted folder as its working directory and a standard Gamepad layout. No Proton override or Steamworks integration is required. WSL validation does not establish Steam Deck compatibility or performance.
 
-## Milestone 3 playtest
+## Playtest checklist
 
 1. Launch the standalone build and Continue your existing progress.
 2. Check candy identity and the gold aiming cue at pickup distance; walk behind both kiosks and the counter.
