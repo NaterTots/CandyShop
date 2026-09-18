@@ -1,0 +1,24 @@
+# Godot editor-generated state and caches.
+.godot/
+.mono/
+
+# Local exports and platform build intermediates.
+builds/
+android/build/
+
+# Machine-local export credentials and signing material.
+export_credentials.cfg
+*.keystore
+*.jks
+*.p12
+*.pfx
+
+# Local environment overrides.
+.env
+.env.*
+!.env.example
+
+# Temporary and operating-system metadata.
+*.tmp
+.DS_Store
+Thumbs.db
