@@ -2,6 +2,13 @@
 
 **Milestones 1 and 2 are owner-accepted ("All tests passed"). Milestone 3 polish and standalone Windows/Linux exports are implemented. Awaiting the owner's packaged-build playtest and Steam Deck hardware validation.**
 
+## Web deployment — 2026-09-18
+
+- Added a single-threaded Godot Web export preset for GitHub Pages and an Actions workflow that downloads checksum-verified Godot 4.7.2 tools, caches them, runs the rule and scene suites, exports the browser build, and deploys it with GitHub's official Pages actions. The application title is now simply `Candy Shop`.
+- Automated checks: editor import completed successfully; rule validation passed 58,396 checks with zero failures; scene validation passed 662 checks with zero failures. The local Web export correctly recognized the preset but could not finish because this workstation only has Windows/Linux templates; the cloud workflow installs the official Web templates.
+- Visual inspection: the Web build has not yet been produced or inspected in a browser.
+- Hardware testing: browser keyboard/mouse, browser controller, audio, fullscreen, persistence, Safari, mobile, and Steam Deck behavior remain unverified.
+
 ## Repository publication — 2026-09-18
 
 - Published the complete source repository to the default `main` branch of `NaterTots/CandyShop` as the `POC commit` commit, preserving the repository's existing license and removing the temporary remote `master` branch. Godot editor state, generated exports, platform build intermediates, local environment overrides, export credentials, signing material, temporary files, and operating-system metadata are excluded by `.gitignore`.

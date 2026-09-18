@@ -1,0 +1,94 @@
+name: Deploy Candy Shop to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+
+      - name: Cache Godot and export templates
+        id: godot-cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/godot-4.7.2
+            ~/.local/share/godot/export_templates/4.7.2.stable
+          key: godot-4.7.2-stable-linux-standard
+
+      - name: Install verified Godot 4.7.2 tools
+        if: steps.godot-cache.outputs.cache-hit != 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          release_url="https://github.com/godotengine/godot-builds/releases/download/4.7.2-stable"
+          editor="Godot_v4.7.2-stable_linux.x86_64.zip"
+          templates="Godot_v4.7.2-stable_export_templates.tpz"
+          download_dir="$RUNNER_TEMP/godot-downloads"
+          editor_dir="$HOME/godot-4.7.2"
+          template_dir="$HOME/.local/share/godot/export_templates/4.7.2.stable"
+
+          mkdir -p "$download_dir" "$editor_dir" "$(dirname "$template_dir")"
+          curl --fail --location --retry 3 --output "$download_dir/$editor" "$release_url/$editor"
+          curl --fail --location --retry 3 --output "$download_dir/$templates" "$release_url/$templates"
+          curl --fail --location --retry 3 --output "$download_dir/SHA512-SUMS.txt" "$release_url/SHA512-SUMS.txt"
+
+          cd "$download_dir"
+          grep "  $editor$" SHA512-SUMS.txt | sha512sum --check --strict
+          grep "  $templates$" SHA512-SUMS.txt | sha512sum --check --strict
+          unzip -q "$editor" -d "$editor_dir"
+          unzip -q "$templates" -d "$RUNNER_TEMP/godot-templates"
+          mv "$RUNNER_TEMP/godot-templates/templates" "$template_dir"
+          chmod +x "$editor_dir/Godot_v4.7.2-stable_linux.x86_64"
+
+      - name: Import project
+        run: ~/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --path . --editor --import
+
+      - name: Run rule tests
+        run: ~/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --path . --script tests/test_session.gd
+
+      - name: Run scene smoke tests
+        run: ~/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --path . --script tests/smoke_scene.gd
+
+      - name: Export Web build
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p builds/web
+          ~/godot-4.7.2/Godot_v4.7.2-stable_linux.x86_64 --headless --path . --export-release Web builds/web/index.html
+          cp LICENSE builds/web/LICENSE.txt
+          cp docs/GODOT-NOTICES.txt builds/web/GODOT-NOTICES.txt
+          touch builds/web/.nojekyll
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: builds/web
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
